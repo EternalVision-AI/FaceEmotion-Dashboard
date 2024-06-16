@@ -1,0 +1,300 @@
+{% extends 'main.html' %}
+{% block content %}
+<style>
+/******************************************
+GRAFICO CIRCULAR PIE CHART
+******************************************/
+#container { 
+        width: 100%; height: 400px; margin: 0; padding: 0; 
+      }
+</style>
+
+<br>
+
+
+<div class="row" style="margin-left: 5%;margin-right: 5%;">
+    <div class="col-sm-5">
+        <div class="card" style="height: 100%;">
+            <div>
+                <div id="container"></div>
+                <div>
+                    <ol class="list-group list-group-numbered">
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div style="display: flex;align-items: center;">
+                                <div style="background: #FAC415; border-radius: 50%; width: 16px; height: 16px;"></div>
+                                <div>&nbsp;&nbsp;Happy</div>
+                            </div>
+                          <div class="ms-2 me-auto">
+                            <div id="pro-happy"class="fw-bold" style="font-weight: bolder;"><script>document.write(pro_data[0])</script></div>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div style="display: flex;align-items: center;">
+                                <div style="background: #D92D20; border-radius: 50%; width: 16px; height: 16px;"></div>
+                                <div>&nbsp;&nbsp;Angry</div>
+                            </div>
+                          <div class="ms-2 me-auto">
+                            <div id="pro-angry"class="fw-bold" style="font-weight: bolder;">38%</div>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div style="display: flex;align-items: center;">
+                                <div style="background: #EF6820; border-radius: 50%; width: 16px; height: 16px;"></div>
+                                <div>&nbsp;&nbsp;Surprised</div>
+                            </div>
+                          <div class="ms-2 me-auto">
+                            <div id="pro-surprised"class="fw-bold" style="font-weight: bolder;">13%</div>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div style="display: flex;align-items: center;">
+                                <div style="background: #17B26A; border-radius: 50%; width: 16px; height: 16px;"></div>
+                                <div>&nbsp;&nbsp;Disgusted</div>
+                            </div>
+                          <div class="ms-2 me-auto">
+                            <div id="pro-disgusted"class="fw-bold" style="font-weight: bolder;">12%</div>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div style="display: flex;align-items: center;">
+                                <div style="background: #EAECF0; border-radius: 50%; width: 16px; height: 16px;"></div>
+                                <div>&nbsp;&nbsp;Netural</div>
+                            </div>
+                          <div class="ms-2 me-auto">
+                            <div id="pro-neutral"class="fw-bold" style="font-weight: bolder;">9%</div>
+                          </div>
+                        </li>
+                        <li class="list-group-item d-flex justify-content-between align-items-start">
+                            <div style="display: flex;align-items: center;">
+                                <div style="background: #7A5AF8; border-radius: 50%; width: 16px; height: 16px;"></div>
+                                <div>&nbsp;&nbsp;Fear</div>
+                            </div>
+                          <div class="ms-2 me-auto">
+                            <div id="pro-fear"class="fw-bold" style="font-weight: bolder;">11%</div>
+                          </div>
+                        </li>
+                        
+                      </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-7">
+        <div class="card" style="height: 100%; padding: 20px;">
+            <div class="row" style="display: flex; justify-content: flex-end; padding: 20px; padding-top: 0px;" >  
+                <div>
+                    <!-- Date Picker -->
+                    <input id="date" type="date" name="date" placeholder="Select Date" value="1/1/2000" onchange="getData_date()">
+                    <!-- // Date Picker -->
+                    <select id="gender" class="form-select col-sm-2" aria-label="Select-Gender" onchange="getData()">
+                        <option value="all">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                    </select>&nbsp;&nbsp;
+                    <select id="date_period" class="form-select col-sm-2" aria-label="Select Period" onchange="getData_dateperiod()">
+                        <option value="9999">All</option>
+                        <option value="7"> Last week</option>
+                        <option value="14">Last 2 weeks</option>
+                        <option value="21">Last 3 weeks</option>
+                        <option value="28">Last 4 weeks</option>
+                    </select>
+                </div>
+                    
+            </div>
+            <div class="row" style="height: 50%; display: flex; justify-content: space-between;" >
+                <div class="col-sm-4">
+                    <div class="card emoticard emoti-color-happy">
+                        <div class="emoti-title">Happy</div>
+                        <div id="happy" class="emoti-num">0</div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="emoti-happy"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card emoticard emoti-color-angry">
+                        <div class="emoti-title">Angry</div>
+                        <div id="angry" class="emoti-num">0</div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="emoti-angry"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card emoticard emoti-color-surprised">
+                        <div class="emoti-title">Surprised</div>
+                        <div id="surprised" class="emoti-num">0</div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="emoti-surprised"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="height: 50%; display: flex; justify-content: space-between; padding-top: 20px;" >
+                <div class="col-sm-4">
+                    <div class="card emoticard emoti-color-disgusted">
+                        <div class="emoti-title">Disgusted</div>
+                        <div id="disgusted" class="emoti-num">0</div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="emoti-disgusted"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card emoticard emoti-color-neutural">
+                        <div class="emoti-title">Neutural</div>
+                        <div id="neutral" class="emoti-num">0</div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="emoti-neutural"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card emoticard emoti-color-fear">
+                        <div class="emoti-title">Fear</div>
+                        <div id="fear" class="emoti-num">0</div>
+                        <div style="display: flex; justify-content: center;">
+                            <div class="emoti-fear"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+<div id="result">
+    {{data}}
+</div>
+<div>
+    <tbody style="height:450px; overflow:scroll; display:block;">
+        {% for d in data %}
+        <tr>
+          <td>{{d[0]}}</td>
+        {% endfor %}
+      </tbody>
+
+</div>
+<br>
+
+<script>
+    window.onload(
+        getData()
+    )
+    function EmotiChart(chart_data) {  
+        var palette = anychart.palettes.distinctColors();
+        var total=0
+        for (emoti in chart_data ){
+            total+=chart_data[emoti][1]
+        }
+        // add the colors according to the brands
+        palette.items([
+            { color: "#FAC415" },
+            { color: "#D92D20" },
+            { color: "#EF6820" },
+            { color: "#17B26A" },
+            { color: "#EAECF0" },
+            { color: "#7A5AF8" },
+        ]);
+        // create a pie chart instance with the passed data
+        var chart = anychart
+            .pie(chart_data)
+            // set the inner radius to make a donut chart
+            .innerRadius("65%")
+            // set the color palette
+            .palette(palette);
+        // create a pie chart instance with the passed data
+        chart.title("Donut chart");
+        // set the container id for the chart
+        chart.container("container");
+        // draw the resulting chart
+        chart.legend(false);
+        chart.draw();
+        // create a standalone label
+        var label = anychart.standalones.label();
+        label
+            .useHtml(true)
+            .text(
+            '<span style = "color: #313136; font-size:12px;">Total Emotions</span><br>' +
+                '<br><br><span style = "color: #313136; font-size:26px; font-weight: bolder">'+total+'</span>'
+            )
+            .position("center")
+            .anchor("center")
+            .hAlign("center")
+            .vAlign("middle");
+
+        label.width("100%");
+        label.height("100%");
+
+        // set the label as the center content
+        chart.center().content(label);
+    }
+    
+    anychart.onDocumentReady(
+        EmotiChart(data1)
+    );
+    
+    function getData_date(){
+        document.getElementById('date_period').value="9999"
+        getData()
+    }
+    function getData_dateperiod(){
+        document.getElementById('date').value=""
+        getData()
+    }
+    function getData() {
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        
+        str = this.response;
+        // Remove whitespace and line breaks to make it valid JSON
+        let cleanedStr = str.replace(/\s+/g, ' ').trim();
+        // Parse the string into a JavaScript array
+        let emoti_array = JSON.parse(cleanedStr);
+        console.log(emoti_array)
+        document.getElementById("result").innerText = emoti_array;
+        document.getElementById("happy").innerText = emoti_array[1];
+        document.getElementById("angry").innerText = emoti_array[2];
+        document.getElementById("surprised").innerText = emoti_array[3];
+        document.getElementById("disgusted").innerText = emoti_array[4];
+        document.getElementById("neutral").innerText = emoti_array[5];
+        document.getElementById("fear").innerText = emoti_array[6];
+        // document.getElementById("happy").innerText = emoti_array[7];
+
+        document.getElementById("pro-happy").innerText = Math.round((emoti_array[1]/emoti_array[0])*1000)/10+"%";
+        document.getElementById("pro-angry").innerText = Math.round((emoti_array[2]/emoti_array[0])*1000)/10+"%";
+        document.getElementById("pro-surprised").innerText = Math.round((emoti_array[3]/emoti_array[0])*1000)/10+"%";
+        document.getElementById("pro-disgusted").innerText = Math.round((emoti_array[4]/emoti_array[0])*1000)/10+"%";
+        document.getElementById("pro-neutral").innerText = Math.round((emoti_array[5]/emoti_array[0])*1000)/10+"%";
+        document.getElementById("pro-fear").innerText = Math.round((emoti_array[6]/emoti_array[0])*1000)/10+"%";
+        // document.getElementById("pro-happy").innerText = Math.round((emoti_array[7]/emoti_array[0])*1000)/10+"%";
+        document.getElementById("container").innerHTML=""
+        updated_emoti=[
+            ["Happy", emoti_array[1]],
+            ["Angry", emoti_array[2]],
+            ["Surprised", emoti_array[3]],
+            ["Disgusted", emoti_array[4]],
+            ["Netural", emoti_array[5]],
+            ["Fear", emoti_array[6]],
+        ]
+        EmotiChart(updated_emoti)
+        }
+        // console.log(this.readyState)
+    };
+    xhttp.open("POST", "/emotion", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    let dateValue = document.getElementById("date").value;
+    let genderValue = document.getElementById("gender").value;
+    let datePeriodValue = document.getElementById("date_period").value;
+    console.log(dateValue, genderValue, datePeriodValue)
+    req="date="+dateValue+"&gender="+genderValue+"&date_period="+datePeriodValue;
+    xhttp.send(req);
+    }
+
+</script>
+
+
+  </body>
+{% endblock content %}

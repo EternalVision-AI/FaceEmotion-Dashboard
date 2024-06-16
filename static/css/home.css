@@ -1,0 +1,128 @@
+@import url(font-awesome.min.css);
+@import url("https://fonts.googleapis.com/css?family=Architects+Daughter");
+
+/*
+	Introspect by TEMPLATED
+	templated.co @templatedco
+	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
+*/
+
+.emotion-bg {
+	background-size: cover;
+}
+
+
+
+
+
+
+
+
+.emoticard {
+	height: 100%;
+	display: flex;
+	justify-content: space-evenly;
+	text-align: center;
+}
+
+
+.emoti-color-happy {
+	color: rgb(230, 158, 2);
+	background: linear-gradient(120deg,rgba(230, 158, 2, 0.05),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(230, 158, 2, 0.05),rgb(255 0 0 / 0%) 20%);
+}
+.emoti-color-angry {
+	color: rgb(217, 45, 32);
+	background: linear-gradient(120deg,rgba(217, 45, 32, 0.05),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(217, 45, 32, 0.05),rgb(255 0 0 / 0%) 20%);
+}
+.emoti-color-surprised {
+	color: rgb(239, 104, 32);
+	background: linear-gradient(120deg,rgba(239, 104, 32, 0.05),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(239, 104, 32, 0.05),rgb(255 0 0 / 0%) 20%);
+}
+.emoti-color-disgusted {
+	color: rgb(23, 178, 106);
+	background: linear-gradient(120deg,rgba(23, 178, 106, 0.05),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(23, 178, 106, 0.05),rgb(255 0 0 / 0%) 20%);
+}
+.emoti-color-neutural {
+	color: rgb(234, 236, 240);
+	background: linear-gradient(120deg,rgba(234, 236, 240, 0.05),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(234, 236, 240, 0.05),rgb(255 0 0 / 0%) 20%);
+}
+.emoti-color-fear {
+	color: rgb(122, 90, 248);
+	background: linear-gradient(120deg,rgba(122, 90, 248, 0.05),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(122, 90, 248, 0.05),rgb(255 0 0 / 0%) 20%);
+}
+
+
+.emoti-title {
+	font-size: 20px;
+	font-weight: bold;
+}
+.emoti-num {
+	color: black;
+	font-size: 26px;
+	font-weight: bolder;
+}
+.emoti-happy {
+	width: 100px;
+	height: 100px;
+	background-image: url('../image/emoticon/happy.png');
+	background-size: cover;
+	border-radius: 25%;
+	border: 1px solid rgb(241, 238, 238);
+}
+.emoti-happy {
+	width: 100px;
+	height: 100px;
+	background-image: url('../image/emoticon/happy.png');
+	background-size: cover;
+	border-radius: 25%;
+	border: 1px solid rgb(241, 238, 238);
+}
+.emoti-angry {
+	width: 100px;
+	height: 100px;
+	background-image: url('../image/emoticon/angry.png');
+	background-size: cover;
+	border-radius: 25%;
+	border: 1px solid rgb(241, 238, 238);
+}
+.emoti-surprised {
+	width: 100px;
+	height: 100px;
+	background-image: url('../image/emoticon/surprised.png');
+	background-size: cover;
+	border-radius: 25%;
+	border: 1px solid rgb(241, 238, 238);
+}
+.emoti-disgusted {
+	width: 100px;
+	height: 100px;
+	background-image: url('../image/emoticon/disgusted.png');
+	background-size: cover;
+	border-radius: 25%;
+	border: 1px solid rgb(241, 238, 238);
+}
+.emoti-neutural {
+	width: 100px;
+	height: 100px;
+	background-image: url('../image/emoticon/neutural.png');
+	background-size: cover;
+	border-radius: 25%;
+	border: 1px solid rgb(241, 238, 238);
+}
+.emoti-fear {
+	width: 100px;
+	height: 100px;
+	background-image: url('../image/emoticon/fear.png');
+	background-size: cover;
+	border-radius: 25%;
+	border: 1px solid rgb(241, 238, 238);
+}
+
+
+
