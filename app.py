@@ -27,58 +27,11 @@ app.secret_key = os.urandom(24)
 conn = sqlite3.connect('emodb.db', check_same_thread=False)
 curs = conn.cursor()
 
-# Adafruit Connection
-# ADAFRUIT_IO_USERNAME = "senthil_v"
-# ADAFRUIT_IO_KEY = "c71df31bb11e4204993e69710cc0067e"
-# aio = Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
-# temperature_feed = aio.feeds('temperature')
-# humidity_feed = aio.feeds('humidity')
-
-#Data into Adafruit
-# def Adafruit():
-#     threading.Timer(10.0, Adafruit).start()
-#     for row in curs.execute("SELECT * FROM data ORDER BY timestamp DESC LIMIT 1"):
-#         temp = row[1]
-#         hum = row[2]
-#     aio.send(temperature_feed.key, str(temp))
-#     aio.send(humidity_feed.key, str(hum))
-# Adafruit()
-
-#Text to Speech  
-# playsound("welcome.mp3")
-
-# def notification():
-#     threading.Timer(5.0, notification).start()
-#     for row in curs.execute("SELECT * FROM data ORDER BY timestamp DESC LIMIT 1"):
-#         time = str(row[0])
-#         temp = row[1]
-#         hum = row[2]
-#     if(temp > 30):
-#         notification.notify(title="Message form ARMS", message=f"Temperature was High with {temp} C at {time}",timeout=2)
-#     if(hum > 30):
-#         notification.notify(title="Message form ARMS", message=f"Humidity was High with {hum}  at {time}",timeout=2)
-# notification()
 
 # Error Handling
 @app.errorhandler(404)
 def error(error):
     return render_template('error.html'), 404
-
-#Normal message config
-def whatsappmsg(wa_number, wa_message):
-    account_sid = 'ACCOUNT_SID'
-    auth_token = 'AUTH_TOKEN'
-    client = Client(account_sid, auth_token)
-    message = client.messages \
-        .create(
-            from_='+12563339136',
-            body=wa_message,
-            to=wa_number
-        )
-    if message:
-        return True
-    else:
-        return False
 
 #Home Page
 @app.route('/')
@@ -244,81 +197,6 @@ def emotion():
 def home():
     return render_template('index.html')
 
-#Report Page
-@app.route("/report")
-def report():
-    return render_template('report.html')
-
-#track car Page
-@app.route("/track")
-def track():
-    return render_template('markerflow.html')
-
-#Remote Access Page
-@app.route("/remote")
-def remote():
-    return render_template('remote.html')
-
-#All data Page
-@app.route("/alldata")
-def alldata():
-    conn.row_factory = sqlite3.Row
-    curs.execute("SELECT * FROM data ORDER BY timestamp DESC")
-    rows = curs.fetchall()
-    return render_template('alldata.html', rows=rows)
-
-#Web cam Page
-@app.route("/cam")
-def webcam():
-    return render_template('cam.html')
-
-#Upload File
-@app.route("/upload")
-def upload():
-    return render_template(('upload.html'))
-
-
-
-
-
-
-# Seperate Temerature Data Page
-@app.route("/temp_data")
-def tempdata():
-    conn.row_factory = sqlite3.Row
-    curs.execute("SELECT timestamp,temp FROM data ORDER BY timestamp DESC")
-    tempdata = curs.fetchall()
-    return render_template('tempdata.html',tempdata=tempdata)
-
-# Seperate Humidity Data Page
-@app.route("/hum_data")
-def humdata():
-    conn.row_factory = sqlite3.Row
-    curs.execute("SELECT timestamp,hum FROM data ORDER BY timestamp DESC")
-    humdata = curs.fetchall()
-    return render_template('humdata.html',humdata=humdata)
-
-#Upload file to Firebase storage
-@app.route("/upload-image", methods=["GET", "POST"])
-def upload_image():
-    file = request.files['image']
-    file.save(os.path.join(app.config["UPLOAD_FOLDER"], file.filename))
-    return render_template("/report.html")
-
-# Messaging Service
-@app.route("/wamsg", methods=['POST'])
-def wamsg():
-    wa_number = request.form['wa-phone']
-    wa_message = request.form['wa-msg']
-    wa_msg = whatsappmsg(wa_number, wa_message)
-    if wa_msg:
-        wa_error = 'Succesfull'
-        return render_template('report.html', wa_error=wa_error)
-
-    else:
-        wa_error = 'Invalid Credentials. Please try again.'
-        return render_template('report.html', wa_error=wa_error)
-
 # Send Email
 @app.route("/send_email")
 def send_email():
@@ -345,9 +223,9 @@ def send_email():
 # Download Report Excel Format
 @app.route("/download/excel")
 def download_report():
-    conn = sqlite3.connect('data.db', check_same_thread=False)
+    conn = sqlite3.connect('emodb.db', check_same_thread=False)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM data")
+    cursor.execute("SELECT * FROM emotable")
     result = cursor.fetchall()
 
     #output in bytes
@@ -381,9 +259,9 @@ def download_report():
 # Download Report CSV Format
 @app.route("/download/csv")
 def download_csv():
-    conn = sqlite3.connect('data.db', check_same_thread=False)
+    conn = sqlite3.connect('eomdb.db', check_same_thread=False)
     cursor = conn.cursor()
-    cursor.execute("SELECT * FROM data")
+    cursor.execute("SELECT * FROM emotable")
     result = cursor.fetchall()
     output = io.StringIO()
     writer = csv.writer(output)
@@ -398,35 +276,6 @@ def download_csv():
         writer.writerow(line)
     output.seek(0)
     return Response(output, mimetype="text/csv", headers={"Content-Disposition": "attachment;filename=data.csv"})
-
-
-#Sensor Data
-@app.route('/data', methods=["GET", "POST"])
-def data():
-    # Data Format
-    # [TIME, Temperature, Humidity]
-    for row in curs.execute("SELECT * FROM data ORDER BY timestamp DESC LIMIT 1"):
-        temp = int(row[1])
-        hum = int(row[2])
-    Temperature = temp
-    Humidity = hum
-    data = [time() * 1000, Temperature, Humidity]
-    response = make_response(json.dumps(data))
-    response.content_type = 'application/json'
-    return response
-
-#Location Data
-@app.route('/locationdata', methods=["GET", "POST"])
-def locationdata():
-    for row in curs.execute("SELECT * FROM map ORDER BY timestamp DESC LIMIT 1"):
-        longi = row[1]
-        lati = row[2]
-    Longitude = longi
-    Latitude = lati
-    data = {"geometry":{"type":"Point","coordinates":[Latitude, Longitude]},"type":"Feature","properties":{}}
-    response = make_response(json.dumps(data))
-    response.content_type = 'application/json'
-    return response
 
 if __name__ == "__main__":
     app.run(debug=True)
