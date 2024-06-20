@@ -1,18 +1,38 @@
-{% extends 'main.html' %}
+{% extends 'navbar.html' %}
 {% block content %}
-<style>
-/******************************************
-GRAFICO CIRCULAR PIE CHART
-******************************************/
-#container { 
-        width: 100%; height: 400px; margin: 0; padding: 0; 
-      }
-</style>
+
 
 <br>
 
+<div class="filter-bar">
+    <h1 class="text-bolder">
+        Graphical Report
+    </h1>
+    <div class="d-flex justify-content-end align-items-center col-sm-6"> 
+        <!-- Date Picker -->
+        <div class="d-flex col-sm-6 align-items-center">
+            <div>Start: </div> <input id="start_date" type="date" class="col-sm-5" placeholder="Select Date" onchange="getData_date()" style="height: 50px;">&nbsp;&nbsp;
+            <div>End: </div> <input id="end_date" type="date" class="col-sm-5" placeholder="Select Date" onchange="getData_date()" style="height: 50px;">&nbsp;&nbsp;
+        </div>&nbsp;&nbsp;
+        <!-- // Date Picker -->
+        <select id="gender" class="form-select col-sm-3" style="height: 50px;" aria-label="Select Gender" onchange="getData()">
+            <option value="all">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>&nbsp;&nbsp;
+        <select id="date_period" class="form-select col-sm-3" style="height: 50px;" aria-label="Select Period" onchange='getData_dateperiod()'>
+            <option value="9999">All</option>
+            <option value="1"> Last week</option>
+            <option value="2">Last 2 weeks</option>
+            <option value="3">Last 3 weeks</option>
+            <option value="4">Last 4 weeks</option>
+        </select>
+    </div>
+</div>
 
 <div class="row" style="margin-left: 5%;margin-right: 5%;">
+
+
     <div class="col-sm-5">
         <div class="card" style="height: 100%;">
             <div>
@@ -20,57 +40,57 @@ GRAFICO CIRCULAR PIE CHART
                 <div>
                     <ol class="list-group list-group-numbered">
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div style="display: flex;align-items: center;">
-                                <div style="background: #FAC415; border-radius: 50%; width: 16px; height: 16px;"></div>
+                            <div class="d-flex flex-center">
+                                <div class="color-happy"></div>
                                 <div>&nbsp;&nbsp;Happy</div>
                             </div>
                           <div class="ms-2 me-auto">
-                            <div id="pro-happy"class="fw-bold" style="font-weight: bolder;"><script>document.write(pro_data[0])</script></div>
+                            <div id="pro-happy" class="fw-bold text-bolder"></div>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div style="display: flex;align-items: center;">
-                                <div style="background: #D92D20; border-radius: 50%; width: 16px; height: 16px;"></div>
+                            <div class="d-flex flex-center">
+                                <div class="color-angry"></div>
                                 <div>&nbsp;&nbsp;Angry</div>
                             </div>
                           <div class="ms-2 me-auto">
-                            <div id="pro-angry"class="fw-bold" style="font-weight: bolder;">38%</div>
+                            <div id="pro-angry" class="fw-bold text-bolder">38%</div>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div style="display: flex;align-items: center;">
-                                <div style="background: #EF6820; border-radius: 50%; width: 16px; height: 16px;"></div>
+                            <div class="d-flex flex-center">
+                                <div class="color-surprised"></div>
                                 <div>&nbsp;&nbsp;Surprised</div>
                             </div>
                           <div class="ms-2 me-auto">
-                            <div id="pro-surprised"class="fw-bold" style="font-weight: bolder;">13%</div>
+                            <div id="pro-surprised" class="fw-bold text-bolder">13%</div>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div style="display: flex;align-items: center;">
-                                <div style="background: #17B26A; border-radius: 50%; width: 16px; height: 16px;"></div>
+                            <div class="d-flex flex-center">
+                                <div class="color-disgusted"></div>
                                 <div>&nbsp;&nbsp;Disgusted</div>
                             </div>
                           <div class="ms-2 me-auto">
-                            <div id="pro-disgusted"class="fw-bold" style="font-weight: bolder;">12%</div>
+                            <div id="pro-disgusted" class="fw-bold text-bolder">12%</div>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div style="display: flex;align-items: center;">
-                                <div style="background: #EAECF0; border-radius: 50%; width: 16px; height: 16px;"></div>
+                            <div class="d-flex flex-center">
+                                <div class="color-neutral"></div>
                                 <div>&nbsp;&nbsp;Netural</div>
                             </div>
                           <div class="ms-2 me-auto">
-                            <div id="pro-neutral"class="fw-bold" style="font-weight: bolder;">9%</div>
+                            <div id="pro-neutral" class="fw-bold text-bolder">9%</div>
                           </div>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-start">
-                            <div style="display: flex;align-items: center;">
-                                <div style="background: #7A5AF8; border-radius: 50%; width: 16px; height: 16px;"></div>
+                            <div class="d-flex flex-center">
+                                <div class="color-fear"></div>
                                 <div>&nbsp;&nbsp;Fear</div>
                             </div>
                           <div class="ms-2 me-auto">
-                            <div id="pro-fear"class="fw-bold" style="font-weight: bolder;">11%</div>
+                            <div id="pro-fear" class="fw-bold text-bolder">11%</div>
                           </div>
                         </li>
                         
@@ -81,32 +101,12 @@ GRAFICO CIRCULAR PIE CHART
     </div>
     <div class="col-sm-7">
         <div class="card" style="height: 100%; padding: 20px;">
-            <div class="row" style="display: flex; justify-content: flex-end; padding: 20px; padding-top: 0px;" >  
-                <div>
-                    <!-- Date Picker -->
-                    <input id="date" type="date" name="date" placeholder="Select Date" value="1/1/2000" onchange="getData_date()">
-                    <!-- // Date Picker -->
-                    <select id="gender" class="form-select col-sm-2" aria-label="Select-Gender" onchange="getData()">
-                        <option value="all">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                    </select>&nbsp;&nbsp;
-                    <select id="date_period" class="form-select col-sm-2" aria-label="Select Period" onchange="getData_dateperiod()">
-                        <option value="9999">All</option>
-                        <option value="7"> Last week</option>
-                        <option value="14">Last 2 weeks</option>
-                        <option value="21">Last 3 weeks</option>
-                        <option value="28">Last 4 weeks</option>
-                    </select>
-                </div>
-                    
-            </div>
-            <div class="row" style="height: 50%; display: flex; justify-content: space-between;" >
+            <div class="row d-flex justify-content-between" style="height: 50%;">
                 <div class="col-sm-4">
                     <div class="card emoticard emoti-color-happy">
                         <div class="emoti-title">Happy</div>
                         <div id="happy" class="emoti-num">0</div>
-                        <div style="display: flex; justify-content: center;">
+                        <div class="d-flex justify-content-center">
                             <div class="emoti-happy"></div>
                         </div>
                     </div>
@@ -115,7 +115,7 @@ GRAFICO CIRCULAR PIE CHART
                     <div class="card emoticard emoti-color-angry">
                         <div class="emoti-title">Angry</div>
                         <div id="angry" class="emoti-num">0</div>
-                        <div style="display: flex; justify-content: center;">
+                        <div class="d-flex justify-content-center">
                             <div class="emoti-angry"></div>
                         </div>
                     </div>
@@ -124,18 +124,18 @@ GRAFICO CIRCULAR PIE CHART
                     <div class="card emoticard emoti-color-surprised">
                         <div class="emoti-title">Surprised</div>
                         <div id="surprised" class="emoti-num">0</div>
-                        <div style="display: flex; justify-content: center;">
+                        <div class="d-flex justify-content-center">
                             <div class="emoti-surprised"></div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="row" style="height: 50%; display: flex; justify-content: space-between; padding-top: 20px;" >
+            <div class="row d-flex justify-content-betweem" style="height: 50%; padding-top: 20px;" >
                 <div class="col-sm-4">
                     <div class="card emoticard emoti-color-disgusted">
                         <div class="emoti-title">Disgusted</div>
                         <div id="disgusted" class="emoti-num">0</div>
-                        <div style="display: flex; justify-content: center;">
+                        <div class="d-flex justify-content-center">
                             <div class="emoti-disgusted"></div>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ GRAFICO CIRCULAR PIE CHART
                     <div class="card emoticard emoti-color-neutural">
                         <div class="emoti-title">Neutural</div>
                         <div id="neutral" class="emoti-num">0</div>
-                        <div style="display: flex; justify-content: center;">
+                        <div class="d-flex justify-content-center">
                             <div class="emoti-neutural"></div>
                         </div>
                     </div>
@@ -153,7 +153,7 @@ GRAFICO CIRCULAR PIE CHART
                     <div class="card emoticard emoti-color-fear">
                         <div class="emoti-title">Fear</div>
                         <div id="fear" class="emoti-num">0</div>
-                        <div style="display: flex; justify-content: center;">
+                        <div class="d-flex justify-content-center">
                             <div class="emoti-fear"></div>
                         </div>
                     </div>
@@ -164,19 +164,7 @@ GRAFICO CIRCULAR PIE CHART
     </div>
 </div>
 
-<div id="result">
-    {{data}}
-</div>
-<div>
-    <tbody style="height:450px; overflow:scroll; display:block;">
-        {% for d in data %}
-        <tr>
-          <td>{{d[0]}}</td>
-        {% endfor %}
-      </tbody>
 
-</div>
-<br>
 
 <script>
     window.onload(
@@ -204,8 +192,6 @@ GRAFICO CIRCULAR PIE CHART
             .innerRadius("65%")
             // set the color palette
             .palette(palette);
-        // create a pie chart instance with the passed data
-        chart.title("Donut chart");
         // set the container id for the chart
         chart.container("container");
         // draw the resulting chart
@@ -236,12 +222,17 @@ GRAFICO CIRCULAR PIE CHART
     );
     
     function getData_date(){
-        document.getElementById('date_period').value="9999"
         getData()
     }
     function getData_dateperiod(){
-        document.getElementById('date').value=""
-        getData()
+        if (document.getElementById('date_period').value==9999){
+            document.getElementById('start_date').value='';
+            document.getElementById('end_date').value='';
+        }
+        else 
+            document.getElementById('start_date').value=getDateWeekAgo(document.getElementById('date_period').value);
+            document.getElementById('end_date').value=getCurrentDate();
+        getData();
     }
     function getData() {
         var xhttp = new XMLHttpRequest();
@@ -254,7 +245,6 @@ GRAFICO CIRCULAR PIE CHART
         // Parse the string into a JavaScript array
         let emoti_array = JSON.parse(cleanedStr);
         console.log(emoti_array)
-        document.getElementById("result").innerText = emoti_array;
         document.getElementById("happy").innerText = emoti_array[1];
         document.getElementById("angry").innerText = emoti_array[2];
         document.getElementById("surprised").innerText = emoti_array[3];
@@ -262,7 +252,9 @@ GRAFICO CIRCULAR PIE CHART
         document.getElementById("neutral").innerText = emoti_array[5];
         document.getElementById("fear").innerText = emoti_array[6];
         // document.getElementById("happy").innerText = emoti_array[7];
-
+        if (emoti_array[0]==0){
+            emoti_array[0]=1
+        }
         document.getElementById("pro-happy").innerText = Math.round((emoti_array[1]/emoti_array[0])*1000)/10+"%";
         document.getElementById("pro-angry").innerText = Math.round((emoti_array[2]/emoti_array[0])*1000)/10+"%";
         document.getElementById("pro-surprised").innerText = Math.round((emoti_array[3]/emoti_array[0])*1000)/10+"%";
@@ -285,16 +277,47 @@ GRAFICO CIRCULAR PIE CHART
     };
     xhttp.open("POST", "/emotion", true);
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    let dateValue = document.getElementById("date").value;
+    let start_dateValue = document.getElementById("start_date").value;
+    let end_dateValue 
+    if (document.getElementById("end_date").value == "")
+        end_dateValue= getCurrentDate();
+    else 
+        end_dateValue = document.getElementById("end_date").value;
     let genderValue = document.getElementById("gender").value;
-    let datePeriodValue = document.getElementById("date_period").value;
-    console.log(dateValue, genderValue, datePeriodValue)
-    req="date="+dateValue+"&gender="+genderValue+"&date_period="+datePeriodValue;
+    // let datePeriodValue = document.getElementById("date_period").value;
+    let datePeriodValue = "";
+    console.log(start_dateValue, "---", end_dateValue, "---", genderValue, "---", datePeriodValue)
+    req="start_date="+start_dateValue+"&end_date="+end_dateValue+"&gender="+genderValue+"&date_period="+datePeriodValue;
     xhttp.send(req);
     }
 
+function getCurrentDate() {
+    const date = new Date();
+    let month = date.getMonth() + 1; // getMonth() returns months from 0-11
+    let day = date.getDate();
+    const year = date.getFullYear();
+
+    // Add leading zeros if necessary
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+
+    return `${year}-${month}-${day}`;
+}
+function getDateWeekAgo(weeks) {
+    const today = new Date();
+    const oneWeekAgo = new Date(today);
+    oneWeekAgo.setDate(today.getDate() - 7*weeks);
+
+    let month = oneWeekAgo.getMonth() + 1; // getMonth() returns months from 0-11
+    let day = oneWeekAgo.getDate();
+    const year = oneWeekAgo.getFullYear();
+
+    // Add leading zeros if necessary
+    month = month < 10 ? '0' + month : month;
+    day = day < 10 ? '0' + day : day;
+    return `${year}-${month}-${day}`;
+}
 </script>
 
 
-  </body>
 {% endblock content %}

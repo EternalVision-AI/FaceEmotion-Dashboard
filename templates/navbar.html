@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title> A R M S {{title}} </title>
+    <title> Emosense </title>
     <link rel="shortcut icon" href="{{ url_for('static', filename='image/raspi.png') }}" />
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/addtohomescreen.css') }}">
     <script src="{{ url_for('static', filename='js/addtohomescreen.js') }}"></script>
@@ -32,6 +32,7 @@
 
     </script>
     <script src="https://www.gstatic.com/dialogflow-console/fast/messenger/bootstrap.js?v=1"></script>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/home.css') }}">
     <!-- Bootstraps Java Scipts Links -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
@@ -51,8 +52,8 @@
     <!-- JQuery links  -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
     
-<script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
-<link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.css' rel='stylesheet' />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -76,6 +77,13 @@
     <!--    Mapbox -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+
+
+    <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-core.min.js"></script>
+    <script src="https://cdn.anychart.com/releases/8.11.1/js/anychart-pie.min.js"></script>
+
+    
+
     <style>
     	body { margin: 0; padding: 0; }
     	#map { position: absolute; width: 100%; height: 100%}
@@ -96,63 +104,30 @@
     </style>
 </head>
 
-<body class="fixed-nav sticky-footer emotion-bg" id="page-top"  onload="startTime()">
+<body class="fixed-nav sticky-footer emotion-bg" id="page-top">
 <br><br>
-<df-messenger
-  intent="WELCOME"
-  chat-title="ARMS"
-  agent-id="7e125952-eec5-4b65-a2da-05405af42fb1"
-  language-code="en"
-></df-messenger>
 
-<nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
-    <a class="navbar-brand" href="{{ url_for('.home') }}">A R M S </a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                <a class="nav-link" href="{{ url_for('.home') }}">
-                    <i class="fa fa-fw fa-dashboard"></i>
-                    <span class="nav-link-text">Dashboard</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="All Data">
-                <a class="nav-link" href="{{ url_for('.alldata') }}">
-                    <i class="fa fa-fw fa-database "></i>
-                    <span class="nav-link-text">All Data</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Track Car">
-                <a class="nav-link" href="{{ url_for('.track') }}">
-                    <i class="fa fa-fw fa-location-arrow "></i>
-                    <span class="nav-link-text">Track</span>
-                </a>
-            </li>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Webcam">
-                <a class="nav-link" href="/cam">
-                    <i class="fa fa-fw fa-video-camera"></i>
-                    <span class="nav-link-text">Web cam</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Report">
-                <a class="nav-link" href="{{ url_for('.report') }}">
-                    <i class="fa fa-fw fa-exclamation-triangle"></i>
-                    <span class="nav-link-text">Report</span>
-                </a>
-            </li>
-            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Remote">
-                <a class="nav-link" href="/remote">
-                    <i class="fa fa-fw fa-universal-access "></i>
-                    <span class="nav-link-text">Remote Access</span>
-                </a>
-            </li>
-    </div>
-    <form class="form-inline my-2 my-lg-0">
-        <a class="btn btn-info" href="/">Logout</a>
-    </form>
+<nav class="navbar navbar-expand-lg fixed-top bottom-border" id="mainNav">
+    <a class="navbar-brand emosense" href="{{ url_for('.home') }}">EmoSense</a>
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+          <!-- <li class="nav-item active">
+            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" href="#">Disabled</a>
+          </li> -->
+        </ul>
+        <form class="form-inline d-flex justify-content-between" style="width: 130px;">
+          <i class="fa fa-lg fa-search nav-icon" aria-hidden="true"></i>
+          <i class="fa fa-lg fa-cog nav-icon" aria-hidden="true"></i>
+          <div class="avatar"></div>
+        </form>
+      </div>
+    
 </nav>
 <br>
 

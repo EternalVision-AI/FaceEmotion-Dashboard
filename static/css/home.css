@@ -1,17 +1,45 @@
 @import url(font-awesome.min.css);
 @import url("https://fonts.googleapis.com/css?family=Architects+Daughter");
 
-/*
-	Introspect by TEMPLATED
-	templated.co @templatedco
-	Released for free under the Creative Commons Attribution 3.0 license (templated.co/license)
-*/
+* {
+	font-family: Arial, Helvetica, sans-serif;
+	color: gray;
+}
+
+.bottom-border {
+	border-bottom: 1px solid rgb(179, 177, 177); 
+	padding-left: 5% !important;
+	padding-right: 5% !important;
+}
+.emosense {
+	color: red; 
+	font-size: 30px !important; 
+	font-weight: bolder;
+}
+.avatar {
+	width: 50px;
+	height: 50px;
+	background:url(../image/avatar.png);
+	background-size: 100% 100%;
+	border-radius: 100%;
+}
+
+.nav-icon {
+	color: gray;
+}
 
 .emotion-bg {
 	background-size: cover;
 }
 
 
+
+/******************************************
+GRAFICO CIRCULAR PIE CHART
+******************************************/
+#container { 
+  width: 100%; height: 400px; margin: 0; padding: 0; 
+}
 
 
 
@@ -28,33 +56,33 @@
 
 .emoti-color-happy {
 	color: rgb(230, 158, 2);
-	background: linear-gradient(120deg,rgba(230, 158, 2, 0.05),rgb(255 0 0 / 0%) 20%),
-    linear-gradient(336deg, rgba(230, 158, 2, 0.05),rgb(255 0 0 / 0%) 20%);
+	background: linear-gradient(120deg,rgba(230, 158, 2, 0.1),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(230, 158, 2, 0.1),rgb(255 0 0 / 0%) 20%);
 }
 .emoti-color-angry {
 	color: rgb(217, 45, 32);
-	background: linear-gradient(120deg,rgba(217, 45, 32, 0.05),rgb(255 0 0 / 0%) 20%),
-    linear-gradient(336deg, rgba(217, 45, 32, 0.05),rgb(255 0 0 / 0%) 20%);
+	background: linear-gradient(120deg,rgba(217, 45, 32, 0.1),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(217, 45, 32, 0.1),rgb(255 0 0 / 0%) 20%);
 }
 .emoti-color-surprised {
 	color: rgb(239, 104, 32);
-	background: linear-gradient(120deg,rgba(239, 104, 32, 0.05),rgb(255 0 0 / 0%) 20%),
-    linear-gradient(336deg, rgba(239, 104, 32, 0.05),rgb(255 0 0 / 0%) 20%);
+	background: linear-gradient(120deg,rgba(239, 104, 32, 0.1),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(239, 104, 32, 0.1),rgb(255 0 0 / 0%) 20%);
 }
 .emoti-color-disgusted {
 	color: rgb(23, 178, 106);
-	background: linear-gradient(120deg,rgba(23, 178, 106, 0.05),rgb(255 0 0 / 0%) 20%),
-    linear-gradient(336deg, rgba(23, 178, 106, 0.05),rgb(255 0 0 / 0%) 20%);
+	background: linear-gradient(120deg,rgba(23, 178, 106, 0.1),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(23, 178, 106, 0.1),rgb(255 0 0 / 0%) 20%);
 }
 .emoti-color-neutural {
 	color: rgb(234, 236, 240);
-	background: linear-gradient(120deg,rgba(234, 236, 240, 0.05),rgb(255 0 0 / 0%) 20%),
-    linear-gradient(336deg, rgba(234, 236, 240, 0.05),rgb(255 0 0 / 0%) 20%);
+	background: linear-gradient(120deg,rgba(234, 236, 240, 0.1),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(234, 236, 240, 0.1),rgb(255 0 0 / 0%) 20%);
 }
 .emoti-color-fear {
 	color: rgb(122, 90, 248);
-	background: linear-gradient(120deg,rgba(122, 90, 248, 0.05),rgb(255 0 0 / 0%) 20%),
-    linear-gradient(336deg, rgba(122, 90, 248, 0.05),rgb(255 0 0 / 0%) 20%);
+	background: linear-gradient(120deg,rgba(122, 90, 248, 0.1),rgb(255 0 0 / 0%) 20%),
+    linear-gradient(336deg, rgba(122, 90, 248, 0.1),rgb(255 0 0 / 0%) 20%);
 }
 
 
@@ -126,3 +154,30 @@
 
 
 
+.filter-bar {
+	margin-left: 5%; margin-right: 5%; width: 90%; display: flex; justify-content: space-between; padding: 20px;
+}
+/* emotion title */
+.color-happy {
+	background: #FAC415; border-radius: 50%; width: 16px; height: 16px;
+}
+.color-angry {
+	background: #D92D20; border-radius: 50%; width: 16px; height: 16px;
+}
+.color-surprised {
+	background: #EF6820; border-radius: 50%; width: 16px; height: 16px;
+}
+.color-disgusted {
+	background: #17B26A; border-radius: 50%; width: 16px; height: 16px;
+}
+.color-neutral {
+	background: #EAECF0; border-radius: 50%; width: 16px; height: 16px;
+}
+.color-fear {
+	background: #7A5AF8; border-radius: 50%; width: 16px; height: 16px;
+}
+
+.text-bolder {
+	font-weight: bolder;
+	color: black;
+}
